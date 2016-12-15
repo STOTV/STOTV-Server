@@ -92,6 +92,7 @@ def location(id=None):
     data= []
     for location in locations:
         loc={}
+        loc['deviceId']=location.device.id
         loc['name']=location.device.deviceName
         loc['time']=location.time
         loc['latitude']=location.latitude
