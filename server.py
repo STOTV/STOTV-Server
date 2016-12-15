@@ -98,6 +98,7 @@ def location(id=None):
         loc['latitude']=location.latitude
         loc['longitude']=location.longitude
         loc['cep']=location.cep
+        data.append(loc)
     return json.dumps(data)
 
 ### for testing ONLY, use nginx for better security and performance

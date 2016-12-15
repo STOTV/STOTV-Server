@@ -1,8 +1,32 @@
 <html>
 	<head>
-		<title>Hello</title>
+		<title>Map</title>
+		<script src="http://maps.googleapis.com/maps/api/js"></script>
+		<script src="/assets/js/map.js"></script>
+		<style type="text/css">
+			#googleMap {
+				width: 100%;
+				height: 500px;
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Hello World!</h1>
+		<div class="black">
+			<h1>devRant Community Project 2016</h1>
+		</div>
+		<div class="white">
+			<h3>Tracking Map</h3>
+			<div id="googleMap"></div>
+		</div>
+		<div class="recovery">
+			<h3>Found a bottle?</h3>
+			<div id="recovery">
+				<form method="post" onsubmit="return recovery()">
+					<label for="imei">Imei Number</label>
+					<input type="text" name="imei" value=""/>
+					<button type="submit">Get Recovery Information</button>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>
