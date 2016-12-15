@@ -83,12 +83,12 @@ def found(imei):
 
 #api endpoint for tracking all or specific tracker
 @app.route("/api/v1/location")
-@app.route("/api/v1/location/<imei>")
-def location(imei=None):
-    if imei is None:
+@app.route("/api/v1/location/<id>")
+def location(id=None):
+    if id is None:
         locations=Data.query.order_by(desc(Data.time)).limit(20).all()
     else:
-        locations=Data.query.filter_by(imei=imei).order_by(desc(Data.time)).limit(20)
+        locations=Data.query.filter_by(id=id).order_by(desc(Data.time)).limit(20)
     data= []
     for location in locations:
         loc={}
