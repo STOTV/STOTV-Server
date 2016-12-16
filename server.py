@@ -45,7 +45,7 @@ class Data(db.Model):
     def __repr__(self):
         return '<Data %r>' % self.imei
 
-#db.create_all();
+db.create_all();
 
 #api endpoint for rockBlock servers to send us location information
 @app.route("/api/v1/send", methods=['POST'])

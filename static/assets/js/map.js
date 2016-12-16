@@ -45,7 +45,7 @@ function getLocation(id) {
 					bounds.extend(marker.position);
 					google.maps.event.addListener(marker,'click',(function(marker,i){
 						return function(){
-							infowindow.setContent("Name: "+json[i]['name']+"<br>"+"Time: "+json[i]['time']+"<br>"+"CEP: "+json[i]['cep']);
+							infowindow.setContent("Name: <a href='?id="+json[i]['deviceId']+"'>'"+json[i]['name']+"</a><br>"+"Time: "+json[i]['time']+"<br>"+"CEP: "+json[i]['cep']);
 							infowindow.open(map, marker);
 						}
 					})(marker,i));
@@ -61,6 +61,21 @@ function getLocation(id) {
 	}
 	xmlhttp.send();
 }
+function getQueryString(name){
+	var query = window.location.search.substring(1);
+	var vars = query.split('&');
+	for(i=0;i<vars.length;i++){
+		var split=vars[i].split('=');
+		if(decodeURIComponent(split[0])==name){
+			return decodeURIComponent(split[1])
+		}
+	}
+	return undefined;
+}
 google.maps.event.addDomListener(window, 'load', function(){
-	getLocation(undefined);
+	var found=getQueryString("imei");
+	if(found!=undefined){
+		fetchRecovery(found);
+	}
+	getLocation(getQueryString("id"));
 });
