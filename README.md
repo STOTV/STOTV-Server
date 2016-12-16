@@ -2,7 +2,7 @@
 Server writen for location tracking. devRant Community Project 2016
 [![Build Status](https://travis-ci.org/STOTV/STOTV-Server.svg?branch=master)](https://travis-ci.org/STOTV/STOTV-Server)
 
-Talk at: stotv.stack.com <br>
+Talk at: stotv.slack.com <br>
 Join at: stotv.herokuapp.com <br>
 
 Inspired By: https://www.devrant.io/rants/303014
