@@ -1,8 +1,8 @@
 from flask import Flask, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import desc, ForeignKey
-from sqlalchemy.orm import relationship
-import json, os
+from sqlalchemy import desc, exists, ForeignKey
+from sqlalchemy.orm import relationship, sessionmaker
+import json, os, codecs
 
 app = Flask(__name__,static_url_path='/static')
 ### Suggest change to mysql for performance, for easy testing
@@ -30,10 +30,10 @@ class Data(db.Model):
     imei = db.Column(db.Integer,ForeignKey(Device.imei))
     device = relationship('Device', foreign_keys='Data.imei')
     momsn = db.Column(db.Integer) # not unique cause the counter rolls over
-    time = db.Column(db.Integer)
+    time = db.Column(db.String(80))
     latitude = db.Column(db.String(20)) # lazy hack, probably should be a double
     longitude = db.Column(db.String(20)) # same as above its almost 3:30 am
-    cep = db.Column(db.String(20)) # need research
+    cep = db.Column(db.Integer)
     #ToDo: other data
     def __init__(self,imei,momsn,time,latitude,longitude,cep):
         self.imei=imei
@@ -45,11 +45,12 @@ class Data(db.Model):
     def __repr__(self):
         return '<Data %r>' % self.imei
 
-db.create_all();
+#db.create_all();
 
 #api endpoint for rockBlock servers to send us location information
 @app.route("/api/v1/send", methods=['POST'])
 def submit():
+    form=request.form
     # rockBlock unique identifier 15 digits
     imei=form['imei']
     # "message id" can be used to prevent replays
@@ -61,8 +62,9 @@ def submit():
     #how accurate latitude and longitude are
     cep=form['iridium_cep']
     data=form['data']
-    decodedData=data.decode("hex")
-    sanityCheck=Session.query(exists().where(Device.imei==imei))
+    decode_hex = codecs.getdecoder("hex_codec")
+    decodedData=decode_hex(data)[0]
+    sanityCheck=db.session.query(exists().where(Device.imei==imei))
     if sanityCheck:
         loc=Data(imei,momsn,time,latitude,longitude,cep)
         db.session.add(loc)
