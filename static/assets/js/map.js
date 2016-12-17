@@ -32,7 +32,7 @@
                 if (xmlhttp.status == 200) {
                     var json = JSON.parse(xmlhttp.responseText);
                     var mapProp = {
-                        zoom: 12,
+                        zoom: 6,
                         scrollwheel: true,
                         draggable: true,
                         mapTypeId: "hybrid",
@@ -61,19 +61,19 @@
                         pathCoords.push({lat: Number(json[i]['latitude']), lng: Number(json[i]['longitude'])});
                     }
 
-
-                    var path = new google.maps.Polyline({
-                        path: pathCoords,
-                        geodesic: true,
-                        strokeColor: '#FF0000',
-                        strokeOpacity: 1.0,
-                        strokeWeight: 2
-                    });
-                    path.setMap(map);
-
                     map.fitBounds(bounds);
                     var listener = google.maps.event.addListener(map, "idle", function() {
-                        if (map.getZoom() > 5) map.setZoom(5);
+                        if (map.getZoom() > 6) map.setZoom(6);
+
+                        var path = new google.maps.Polyline({
+                            path: pathCoords,
+                            geodesic: true,
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 1.0,
+                            strokeWeight: 2
+                        });
+                        path.setMap(map);
+
                         google.maps.event.removeListener(listener);
                     });
                 }
