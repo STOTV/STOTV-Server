@@ -14,10 +14,12 @@
             if (xmlhttp.status == 200) {
                 var json = JSON.parse(xmlhttp.responseText);
                 if (json['deviceName'] != undefined) {
-                    document.getElementById('recovery').innerHTML = "Congrats you have found " + json['deviceName'] +
+                    document.getElementById('recovery').innerHTML = "Congratulations! You have found " + json['deviceName'] +
                         "!<br /> Please Mail It Back To: <br />" +
                         json['returnName'] + "<br />" + json['returnAddr1'] + "<br />" + json['returnAddr2'] + "<br /><br />Thank you, <br /> The devRant Community Project 2016 Team";
 
+                }else{
+                    $("#imeiInput").toggleClass("error", true);
                 }
             }
         };

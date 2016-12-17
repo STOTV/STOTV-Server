@@ -1,45 +1,56 @@
 <html>
-	<head>
-		<title>Map</title>
-		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
-		<script src="bower_components/jquery/dist/jquery.js"></script>
-		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
-        <script src="http://maps.googleapis.com/maps/api/js"></script>
-		<script src="assets/js/map.js"></script>
-		<style type="text/css">
-			#googleMap {
-				width: 100%;
-				height: 500px;
-			}
-		</style>
-	</head>
-	<body>
-	<div class="container">
-	<div class="jumbotron text-center">
-	<div class="black">
-			<h1>devRant Community Project 2016</h1>
-			<p> The tracking website for the devRant stressball in a bottle project </p>
-		</div>
-		</div>
-		<!--<div class="white">-->
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3>Tracking Map</h3></div>
-			</div>
-			<div id="googleMap"></div>
-		<!--</div>-->
-		<div class="recovery">
-			<h3>Found a bottle?</h3>
-			<div id="recovery">
-				<form method="post" onsubmit="return recovery()">
-                    <label for="imei">
-                        Imei Number
-                        <input type="text" name="imei" value=""/>
-                    </label>
-                    <button type="submit">Get Recovery Information</button>
-				</form>
-			</div>
-		</div>
-		</div>
-	</body>
+<head>
+    <title>Map</title>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="assets/js/map.js"></script>
+    <style type="text/css">
+        #googleMap {
+            width: 100%;
+            height: 500px;
+        }
+
+        h3{
+            margin-top: 10px;
+        }
+
+        .error{
+            border: 1px solid red;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron text-center">
+        <div class="black">
+            <h1>devRant Community Project 2016</h1>
+            <p> The tracking website for the devRant stressball in a bottle project </p>
+        </div>
+    </div>
+    <!--<div class="white">-->
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>Tracking Map</h3></div>
+        <div class="panel-body"><div id="googleMap"></div></div>
+    </div>
+    <!--</div>-->
+    <div class="panel panel-default recovery">
+        <div class="panel-heading">
+            <h3>Found a bottle?</h3>
+        </div>
+        <div class="panel-body">
+            <div id="recovery">
+                <form method="post" id="form" onsubmit="return recovery()">
+                    <input id="imeiInput" class="form-control" type="text" name="imei" value="" placeholder="IMEI Number" style="margin-bottom: 5px;">
+                    <button class="btn btn-default btn-md" id="submitRecoveryInformation">Get Recovery Information</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>
