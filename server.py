@@ -1,12 +1,16 @@
+import codecs
+import json
+import os
+
 from flask import Flask, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc, exists, ForeignKey
-from sqlalchemy.orm import relationship, sessionmaker
-import json, os, codecs
+from sqlalchemy.orm import relationship
 
 app = Flask(__name__, static_url_path='/static')
 # Suggest change to mysql for performance, for easy testing
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('database_uri', 'sqlite:///./test.db');
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('database_uri', 'sqlite:///./test.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
@@ -103,13 +107,8 @@ def location(id=None):
         locations = Data.query.filter_by(id=id).order_by(desc(Data.time)).limit(20)
     data = []
     for location in locations:
-        loc = {}
-        loc['deviceId'] = location.device.id
-        loc['name'] = location.device.deviceName
-        loc['time'] = location.time
-        loc['latitude'] = location.latitude
-        loc['longitude'] = location.longitude
-        loc['cep'] = location.cep
+        loc = {'deviceId': location.device.id, 'name': location.device.deviceName, 'time': location.time,
+               'latitude': location.latitude, 'longitude': location.longitude, 'cep': location.cep}
         data.append(loc)
     return json.dumps(data)
 
