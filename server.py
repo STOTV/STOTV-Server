@@ -37,7 +37,7 @@ class Data(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     imei = db.Column(db.Integer, ForeignKey(Device.imei))
     device = relationship('Device', foreign_keys='Data.imei')
-    momsn = db.Column(db.Integer)  # not unique cause the counter rolls over
+    momsn = db.Column(db.Integer)  # not unique cause the counter rolls over, message counter from rockBLOCK
     time = db.Column(db.String(80))
     latitude = db.Column(db.String(20))  # lazy hack, probably should be a double
     longitude = db.Column(db.String(20))  # same as above its almost 3:30 am

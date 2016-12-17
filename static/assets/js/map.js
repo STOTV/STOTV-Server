@@ -45,7 +45,8 @@
                     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
                     var bounds = new google.maps.LatLngBounds();
                     var infowindow = new google.maps.InfoWindow();
-                    for (i = 0; i < json.length; i++) {
+                    var pathCoords = [];
+                    for (var i = 0; i < json.length; i++) {
                         var marker = new google.maps.Marker({
                             position: new google.maps.LatLng(json[i]['latitude'], json[i]['longitude']),
                             map: map
@@ -53,11 +54,23 @@
                         bounds.extend(marker.position);
                         google.maps.event.addListener(marker, 'click', (function (marker, i) {
                             return function () {
-                                infowindow.setContent("Name: <a href='?id=" + json[i]['deviceId'] + "'>'" + json[i]['name'] + "</a><br>" + "Time: " + json[i]['time'] + "<br>" + "CEP: " + json[i]['cep']);
+                                infowindow.setContent("Name: <a href='?id=" + json[i]['deviceId'] + "'>" + json[i]['name'] + "</a><br>" + "Time: " + json[i]['time'] + "<br>" + "CEP: " + json[i]['cep']);
                                 infowindow.open(map, marker);
                             }
                         })(marker, i));
+                        pathCoords.push({lat: Number(json[i]['latitude']), lng: Number(json[i]['longitude'])});
                     }
+
+
+                    var path = new google.maps.Polyline({
+                        path: pathCoords,
+                        geodesic: true,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 2
+                    });
+                    path.setMap(map);
+
                     map.fitBounds(bounds);
                     var listener = google.maps.event.addListener(map, "idle", function() {
                         if (map.getZoom() > 5) map.setZoom(5);
