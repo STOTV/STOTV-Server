@@ -2,3 +2,4 @@ test.db
 __pycache__
 .idea/
 *.pyc
+static/bower_components/
