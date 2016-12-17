@@ -1,11 +1,11 @@
 <html>
 	<head>
 		<title>Map</title>
-		<link rel="stylesheet" type="text/css" ref="bower_components/bootstrap/dist/css/bootstrap.css">
 		<script src="bower_components/jquery/dist/jquery.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js"></script>
-		<script src="/assets/js/map.js"></script>
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <script src="http://maps.googleapis.com/maps/api/js"></script>
+		<script src="assets/js/map.js"></script>
 		<style type="text/css">
 			#googleMap {
 				width: 100%;
@@ -25,9 +25,11 @@
 			<h3>Found a bottle?</h3>
 			<div id="recovery">
 				<form method="post" onsubmit="return recovery()">
-					<label for="imei">Imei Number</label>
-					<input type="text" name="imei" value=""/>
-					<button type="submit">Get Recovery Information</button>
+                    <label for="imei">
+                        Imei Number
+                        <input type="text" name="imei" value=""/>
+                    </label>
+                    <button type="submit">Get Recovery Information</button>
 				</form>
 			</div>
 		</div>
