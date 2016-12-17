@@ -35,7 +35,12 @@
                         zoom: 12,
                         scrollwheel: true,
                         draggable: true,
-                        mapTypeId: "hybrid"
+                        mapTypeId: "hybrid",
+                        disableDefaultUI: true,
+                        zoomControl: true,
+                        zoomControlOptions: {
+                            position: google.maps.ControlPosition.LEFT_TOP
+                        }
                     };
                     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
                     var bounds = new google.maps.LatLngBounds();
