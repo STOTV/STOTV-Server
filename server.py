@@ -6,6 +6,7 @@ from flask import Flask, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc, exists, ForeignKey
 from sqlalchemy.orm import relationship
+from crossdomain import crossdomain
 
 app = Flask(__name__, static_url_path='/static')
 # Suggest change to mysql for performance, for easy testing
@@ -100,6 +101,7 @@ def found(imei):
 # api endpoint for tracking all or specific tracker
 @app.route("/api/v1/location")
 @app.route("/api/v1/location/<id>")
+@crossdomain(origin='*')
 def location(id=None):
     if id is None:
         locations = Data.query.order_by(desc(Data.time)).limit(20).all()

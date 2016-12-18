@@ -56,7 +56,7 @@
                         bounds.extend(marker.position);
                         google.maps.event.addListener(marker, 'click', (function (marker, i) {
                             return function () {
-                                infowindow.setContent("Name: <a href='?id=" + json[i]['deviceId'] + "'>" + json[i]['name'] + "</a><br>" + "Time: " + json[i]['time'] + "<br>" + "CEP: " + json[i]['cep']);
+                                infowindow.setContent("Name: " + json[i]['deviceId'] + json[i]['name'] + " <br>" + "Time: " + json[i]['time'] + "<br>" + "CEP: " + json[i]['cep']);
                                 infowindow.open(map, marker);
                             }
                         })(marker, i));
