@@ -24,12 +24,31 @@
     </style>
     <script>
         $(document).ready(function () {
-            $("#myModal").modal('show');
+            if(detectmob()){
+                $("#mobileModal").modal('show');
+            }
         });
+
+        function detectmob() {
+            if( navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i)
+            ){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
     </script>
 </head>
 <body>
-<div id="myModal" class="modal fade">
+<div id="mobileModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
